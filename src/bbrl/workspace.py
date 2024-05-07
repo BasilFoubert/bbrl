@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import numpy as np
 import torch
-from typing import Optional
+from typing import Generator, Optional, Union, List
 
 """This module provides different ways to store tensors that are more flexible
 than the torch.Tensor class. It also defines the `Workspace` as a dictionary of
@@ -412,10 +412,11 @@ class Workspace:
         """Return an iterator over the variables names"""
         return self.variables.keys()
 
-    def __getitem__(self, key):
-        """If key is a string, then it returns a torch.Tensor
-        If key is a list of string, it returns a tuple of torch.Tensor
-        """
+    def __getitem__(
+        self, key: Union[str, List[str]]
+    ) -> Union[torch.Tensor, Generator[torch.Tensor, None, None]]:
+        """If key is a string, then it returns a torch.Tensor.
+        If key is a list of strings, it returns a Generator of torch.Tensor."""
         if isinstance(key, str):
             return self.get_full(key, None)
         else:
