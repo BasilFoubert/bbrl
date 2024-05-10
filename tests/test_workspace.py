@@ -1,7 +1,23 @@
 from typing import Generator
 import pytest
 import torch
-from bbrl.workspace import Workspace
+from bbrl.workspace import SlicedTemporalTensor, Workspace
+
+
+# Class SlicedTemporalTensor
+
+
+# Check the signature of get()
+def test_get():
+    stt = SlicedTemporalTensor()
+    stt.set(0, torch.tensor([[1.0, -1.0], [1.0, -1.0]]), None)
+    tensor_result = stt.get(0, None)
+    assert isinstance(
+        tensor_result, torch.Tensor
+    ), "The result should be a torch.Tensor"
+
+
+# Class Workspace
 
 
 def test_getitem_with_string():

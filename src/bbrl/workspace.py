@@ -58,7 +58,7 @@ class SlicedTemporalTensor:
             s.set(k, self.tensors[k].to(device))
         return s
 
-    def get(self, t: int, batch_dims: Optional[tuple[int, int]]):
+    def get(self, t: int, batch_dims: Optional[tuple[int, int]]) -> torch.Tensor:
         """Get the value of the tensor at time t"""
 
         assert (
